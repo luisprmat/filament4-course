@@ -15,9 +15,13 @@ class ProductsTable
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('price'),
+                TextColumn::make('name')
+                    ->sortable()
+                    ->searchable(isIndividual: true, isGlobal: false),
+                TextColumn::make('price')
+                    ->sortable(),
             ])
+            ->defaultSort('name', 'desc')
             ->filters([
                 //
             ])
