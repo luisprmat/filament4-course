@@ -16,6 +16,7 @@ class ProductForm
                     ->unique(),
                 TextInput::make('price')
                     ->required()
+                    ->prefix('$')
                     ->rule('numeric'),
             ]);
     }
