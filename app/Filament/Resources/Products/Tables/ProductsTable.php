@@ -25,6 +25,7 @@ class ProductsTable
                 TextColumn::make('status')
                     ->badge(),
                 TextColumn::make('category.name'),
+                TextColumn::make('tags.name'),
             ])
             ->defaultSort('name', 'desc')
             ->filters([
