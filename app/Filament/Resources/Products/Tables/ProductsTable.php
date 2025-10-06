@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\Products\Tables;
 
 use App\Enums\ProductStatusEnum;
+use App\Filament\Resources\Categories\CategoryResource;
+use App\Models\Product;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -29,11 +31,18 @@ class ProductsTable
                     ->searchable(),
                 TextColumn::make('price')
                     ->formatStateUsing(fn (int $state): string => Number::currency($state / 100, precision: 0))
+                    ->alignEnd()
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge(),
                 TextColumn::make('category.name'),
-                TextColumn::make('tags.name'),
+                // ->url(fn (Product $record): string => CategoryResource::getUrl('edit', ['record' => $record->category])),
+                TextColumn::make('tags.name')
+                    ->badge(),
+                TextColumn::make('created_at')
+                    // ->date('Y-m-d')
+                    ->since()
+                    ->sortable(),
             ])
             ->defaultSort('name', 'desc')
             ->filters([
