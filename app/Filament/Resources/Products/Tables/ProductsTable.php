@@ -8,6 +8,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\TextInputColumn;
@@ -37,7 +38,7 @@ class ProductsTable
                     ->searchableOptions()
                     ->rules(['required'])
                     ->options(ProductStatusEnum::class),
-                ToggleColumn::make('is_active'),
+                CheckboxColumn::make('is_active'),
                 TextColumn::make('category.name'),
                 TextColumn::make('tags.name')
                     ->badge(),
