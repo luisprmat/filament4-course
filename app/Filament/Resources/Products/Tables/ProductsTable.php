@@ -3,14 +3,15 @@
 namespace App\Filament\Resources\Products\Tables;
 
 use App\Enums\ProductStatusEnum;
-use App\Filament\Resources\Categories\CategoryResource;
-use App\Models\Product;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\TextInputColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\Indicator;
@@ -26,21 +27,21 @@ class ProductsTable
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->sortable()
-                    ->searchable(),
+                TextInputColumn::make('name')
+                    ->rules(['required', 'string', 'max:255', 'min:3']),
                 TextColumn::make('price')
                     ->formatStateUsing(fn (int $state): string => Number::currency($state / 100, precision: 0))
                     ->alignEnd()
                     ->sortable(),
-                TextColumn::make('status')
-                    ->badge(),
+                SelectColumn::make('status')
+                    ->searchableOptions()
+                    ->rules(['required'])
+                    ->options(ProductStatusEnum::class),
+                ToggleColumn::make('is_active'),
                 TextColumn::make('category.name'),
-                // ->url(fn (Product $record): string => CategoryResource::getUrl('edit', ['record' => $record->category])),
                 TextColumn::make('tags.name')
                     ->badge(),
                 TextColumn::make('created_at')
-                    // ->date('Y-m-d')
                     ->since()
                     ->sortable(),
             ])

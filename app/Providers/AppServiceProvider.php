@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Filament\Forms\Components\Field;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\Column;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        TextColumn::configureUsing(function (TextColumn $column) {
+        Column::configureUsing(function (Column $column) {
             $column->translateLabel();
         });
 
