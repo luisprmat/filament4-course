@@ -2,13 +2,21 @@
 
 namespace App\Filament\Resources\Orders\Tables;
 
+use App\Models\Order;
+use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\Checkbox;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Number;
 
 class OrdersTable
@@ -44,11 +52,36 @@ class OrdersTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                ActionGroup::make([
+                    EditAction::make(),
+                    Action::make('Mark as completed')
+                        ->label(__('filament/resources/order.actions.mark_as_completed.title'))
+                        ->requiresConfirmation()
+                        ->icon(Heroicon::OutlinedCheckBadge)
+                        ->hidden(fn (Order $record) => $record->is_completed)
+                        ->action(fn (Order $record) => $record->update(['is_completed' => true])),
+                    // Action::make('Change is completed')
+                    //     ->icon(Heroicon::OutlinedCheckBadge)
+                    //     ->fillForm(fn (Order $order) => ['is_completed' => $order->is_completed])
+                    //     ->schema([
+                    //         Checkbox::make('is_completed'),
+                    //     ])
+                    //     ->action(function (array $data, Order $order): void {
+                    //         $order->update(['is_completed' => $data['is_completed']]);
+                    //     }),
+                ]),
             ])
+            // ->headerActions([
+            //     CreateAction::make(),
+            // ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    BulkAction::make('Mark as completed')
+                        ->label(__('filament/resources/order.actions.mark_as_completed.title'))
+                        ->icon(Heroicon::OutlinedCheckBadge)
+                        ->action(fn (Collection $records) => $records->each->update(['is_completed' => true]))
+                        ->deselectRecordsAfterCompletion(),
                 ]),
             ]);
     }
