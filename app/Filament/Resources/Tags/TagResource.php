@@ -22,9 +22,16 @@ class TagResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
 
+    protected static ?int $navigationSort = 4;
+
     public static function getModelLabel(): string
     {
         return __('filament/resources/tag.label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament/menu/ui.classifiers');
     }
 
     public static function form(Schema $schema): Schema

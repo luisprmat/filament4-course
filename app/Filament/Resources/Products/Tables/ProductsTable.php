@@ -28,7 +28,10 @@ class ProductsTable
         return $table
             ->columns([
                 TextInputColumn::make('name')
-                    ->rules(['required', 'string', 'max:255', 'min:3']),
+                    ->rules(['required', 'string', 'max:255', 'min:3'])
+                    ->validationMessages([
+                        'required' => 'Ponga algo aquí',
+                    ]),
                 TextColumn::make('price')
                     ->formatStateUsing(fn (int $state): string => Number::currency($state / 100, precision: 0))
                     ->alignEnd()

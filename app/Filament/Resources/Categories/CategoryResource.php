@@ -20,11 +20,18 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSwatch;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArchiveBox;
+
+    protected static ?int $navigationSort = 3;
 
     public static function getModelLabel(): string
     {
         return __('filament/resources/category.label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament/menu/ui.classifiers');
     }
 
     public static function form(Schema $schema): Schema

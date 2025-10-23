@@ -20,9 +20,16 @@ class OrderResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedNewspaper;
 
+    protected static ?int $navigationSort = 1;
+
     public static function getModelLabel(): string
     {
         return __('filament/resources/order.label');
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return Order::whereDate('created_at', '>', now()->subDays(30))->count() ? __('New') : null;
     }
 
     public static function form(Schema $schema): Schema
