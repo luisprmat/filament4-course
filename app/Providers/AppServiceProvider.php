@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Filament\Forms\Components\Field;
+use Filament\Infolists\Components\Entry;
 use Filament\Tables\Columns\Column;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Column::configureUsing(function (Column $column) {
             $column->translateLabel();
+        });
+
+        Entry::configureUsing(function (Entry $entry) {
+            $entry->translateLabel();
         });
 
         Field::configureUsing(function (Field $field) {

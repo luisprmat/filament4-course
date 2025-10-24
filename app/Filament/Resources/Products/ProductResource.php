@@ -5,8 +5,10 @@ namespace App\Filament\Resources\Products;
 use App\Filament\Resources\Products\Pages\CreateProduct;
 use App\Filament\Resources\Products\Pages\EditProduct;
 use App\Filament\Resources\Products\Pages\ListProducts;
+use App\Filament\Resources\Products\Pages\ViewProduct;
 use App\Filament\Resources\Products\RelationManagers\TagsRelationManager;
 use App\Filament\Resources\Products\Schemas\ProductForm;
+use App\Filament\Resources\Products\Schemas\ProductInfolist;
 use App\Filament\Resources\Products\Tables\ProductsTable;
 use App\Models\Product;
 use BackedEnum;
@@ -38,6 +40,11 @@ class ProductResource extends Resource
         return ProductsTable::configure($table);
     }
 
+    public static function infolist(Schema $schema): Schema
+    {
+        return ProductInfolist::configure($schema);
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -51,6 +58,7 @@ class ProductResource extends Resource
             'index' => ListProducts::route('/'),
             'create' => CreateProduct::route('/create'),
             'edit' => EditProduct::route('/{record}/edit'),
+            'view' => ViewProduct::route('/{record}'),
         ];
     }
 }
