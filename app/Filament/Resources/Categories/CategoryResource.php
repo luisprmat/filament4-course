@@ -24,6 +24,8 @@ class CategoryResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
+    protected static ?string $recordTitleAttribute = 'name';
+
     public static function getModelLabel(): string
     {
         return __('filament/resources/category.label');

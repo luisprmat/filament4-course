@@ -57,6 +57,7 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->resourceCreatePageRedirect('index')
             ->resourceEditPageRedirect('index')
             ->authMiddleware([

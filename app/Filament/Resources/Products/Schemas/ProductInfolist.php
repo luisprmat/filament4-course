@@ -23,6 +23,9 @@ class ProductInfolist
                 TextEntry::make('status')
                     ->badge()
                     ->inlineLabel(),
+                TextEntry::make('description')
+                    ->placeholder(__('No description.'))
+                    ->columnSpanFull(),
             ]);
     }
 }
