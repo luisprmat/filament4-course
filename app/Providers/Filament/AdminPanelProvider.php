@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Http\Middleware\ApplyTenantScopes;
+use App\Models\Company;
 use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Http\Middleware\Authenticate;
@@ -33,6 +35,10 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             // ->topNavigation()
             ->profile()
+            ->tenant(Company::class)
+            ->tenantMiddleware([
+                ApplyTenantScopes::class,
+            ], isPersistent: true)
             ->multiFactorAuthentication([
                 EmailAuthentication::make(),
                 AppAuthentication::make()
