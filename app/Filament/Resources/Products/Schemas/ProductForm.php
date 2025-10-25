@@ -7,6 +7,7 @@ use App\Filament\Tables\CategoriesTable;
 use Filament\Forms\Components\ModalTableSelect;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Components\Wizard;
 use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Schema;
@@ -23,9 +24,17 @@ class ProductForm
                         // ->description(__('Required fill by all users.'))
                         ->schema([
                             TextInput::make('name')
-                                ->columnSpanFull()
+                                ->label(__('Product Name'))
                                 ->required()
+                                ->columnSpanFull()
+                                ->disabledOn('edit')
+                                // ->live(onBlur: true)
+                                // ->afterStateUpdated(function (Set $set, ?string $state) {
+                                //     $set('slug', str()->slug($state));
+                                // })
                                 ->unique(),
+                            // TextInput::make('slug')
+                            //     ->required(),
                             TextInput::make('price')
                                 ->required()
                                 ->prefix('$')
