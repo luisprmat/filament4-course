@@ -60,7 +60,7 @@ class User extends Authenticatable implements FilamentUser, HasAppAuthentication
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->email === 'admin@admin.com';
+        return true;
     }
 
     public function hasEmailAuthentication(): bool
