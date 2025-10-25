@@ -7,6 +7,7 @@ use App\Filament\Resources\Orders\Pages\EditOrder;
 use App\Filament\Resources\Orders\Pages\ListOrders;
 use App\Filament\Resources\Orders\Schemas\OrderForm;
 use App\Filament\Resources\Orders\Tables\OrdersTable;
+use App\Filament\Resources\Orders\Widgets\TotalOrders;
 use App\Models\Order;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -30,6 +31,13 @@ class OrderResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return Order::whereDate('created_at', '>', now()->subDays(30))->count() ? __('New') : null;
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            TotalOrders::class,
+        ];
     }
 
     public static function form(Schema $schema): Schema
