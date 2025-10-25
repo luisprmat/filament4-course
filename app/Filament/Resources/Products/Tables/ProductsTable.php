@@ -3,12 +3,16 @@
 namespace App\Filament\Resources\Products\Tables;
 
 use App\Enums\ProductStatusEnum;
+use App\Filament\Resources\Products\ProductResource;
+use App\Models\Product;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\TextInputColumn;
@@ -101,6 +105,9 @@ class ProductsTable
                     }),
             ], layout: FiltersLayout::AboveContent)
             ->recordActions([
+                Action::make(__('Tags'))
+                    ->icon(Heroicon::OutlinedTag)
+                    ->url(fn (Product $record): string => ProductResource::getUrl('tags', ['record' => $record])),
                 ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),

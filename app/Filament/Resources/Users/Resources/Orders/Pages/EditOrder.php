@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Orders\Pages;
+namespace App\Filament\Resources\Users\Resources\Orders\Pages;
 
-use App\Filament\Resources\Orders\OrderResource;
+use App\Filament\Resources\Users\Resources\Orders\OrderResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 

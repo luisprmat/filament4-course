@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Products;
 use App\Filament\Resources\Products\Pages\CreateProduct;
 use App\Filament\Resources\Products\Pages\EditProduct;
 use App\Filament\Resources\Products\Pages\ListProducts;
+use App\Filament\Resources\Products\Pages\ManageProductTags;
 use App\Filament\Resources\Products\Pages\ViewProduct;
 use App\Filament\Resources\Products\RelationManagers\TagsRelationManager;
 use App\Filament\Resources\Products\Schemas\ProductForm;
@@ -74,6 +75,7 @@ class ProductResource extends Resource
             'create' => CreateProduct::route('/create'),
             'edit' => EditProduct::route('/{record}/edit'),
             'view' => ViewProduct::route('/{record}'),
+            'tags' => ManageProductTags::route('/{record}/tags'),
         ];
     }
 }
