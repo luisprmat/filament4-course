@@ -64,7 +64,15 @@ class User extends Authenticatable implements FilamentUser, HasAppAuthentication
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        if ($panel->getId() === 'admin' && $this->is_admin) {
+            return true;
+        }
+
+        if ($panel->getId() === 'accountant' && $this->is_admin || $this->is_accountant) {
+            return true;
+        }
+
+        return false;
     }
 
     public function hasEmailAuthentication(): bool
